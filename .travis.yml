@@ -1,0 +1,21 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bigdatawonders/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true bigdatawonders/react-test npm test
+
+after_sucess:
+  - docker build -t bigdatawonders/multi-client ./client
+  - docker build -t bigdatawonders/multi-nginx ./nginx
+  - docker build -t bigdatawonders/multi-server ./server
+  - docker build -t bigdatawonders/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bigdatawonders/multi-client
+  - docker push bigdatawonders/multi-nginx
+  - docker push bigdatawonders/multi-server
+  - docker push bigdatawonders/multi-worker
