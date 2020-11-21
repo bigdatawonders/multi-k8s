@@ -1,6 +1,6 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "containerDifinitions": [
+    "containerDefinitions": [
         {
             "name": "client",
             "image": "bigdatawonders/multi-client",
