@@ -25,6 +25,7 @@
         {
             "name": "nginx",
             "image": "bigdatawonders/multi-nginx",
+            "hostname": "nginx",
             "essential": true,
             "portMapping": [
                {
