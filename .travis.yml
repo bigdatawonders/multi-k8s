@@ -19,3 +19,15 @@ after_sucess:
   - docker push bigdatawonders/multi-nginx
   - docker push bigdatawonders/multi-server
   - docker push bigdatawonders/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-353545775944"
+  bucket_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
